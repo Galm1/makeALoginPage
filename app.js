@@ -2,6 +2,7 @@ const express = require('express');
 const mustacheExpress = require('mustache-express');
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
+const session = require('express-session');
 const app = express();
 
 app.engine('mustache', mustacheExpress());
@@ -10,14 +11,19 @@ app.set('view engine', 'mustache');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(expressValidator());
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}))
 
 app.use(function (req, res, next) {
-  console.log('in interceptor');
+
   next()
 })
 
 app.get('/', function(req, res) {
-  res.render('login')
+  res.render('index')
 });
 
 app.post('/login', function(req, res) {
