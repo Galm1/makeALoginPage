@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(expressValidator());
 
 app.get('/', function(req, res) {
-  res.send('I am ALIIIIVE')
+  res.render('index')
 });
 
 app.listen(3000, function() {
