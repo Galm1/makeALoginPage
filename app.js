@@ -15,6 +15,12 @@ app.get('/', function(req, res) {
   res.render('login')
 });
 
+app.post('/login', function(req, res) {
+  console.log('username is ' + req.body.username);
+  console.log('password is ' + req.body.password);
+  res.render('index')
+})
+
 app.listen(3000, function() {
   console.log('Successfully started express application!');
 });
