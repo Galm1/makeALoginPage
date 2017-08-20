@@ -15,7 +15,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
-
+// making an array of objects with properties.
 let profiles = [{
   username: 'courtney',
   password: 'isbadatcoding'
@@ -24,21 +24,26 @@ let profiles = [{
   password: 'notsorry'
 }];
 
+// this will intercept the user before the home page renders and will send the user to the login page
 app.use(function(req, res, next) {
-
+// if the req url = my login page then move on past this interceptor
   if (req.url === '/login') {
     next();
+    // if not then have the section req the login and then render the login page
   } else if (!req.session.login) {
     res.render('login');
+// if niether are true then move on
   } else {
     next();
   }
 
 })
 
+// set the root to index.mustache
 app.get('/', function(req, res) {
   res.render('index')
 })
+
 
 app.post('/login', function(req, res) {
   let username = req.body.username;
